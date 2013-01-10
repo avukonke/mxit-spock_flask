@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block body %}
+
+<h1>{{result}}</h1>
+<ul>
+	<li>&rarr;<a style="font-weight: bold;" href="/play?choice=rock">ROCK</a></li>
+	<li>&rarr;<a style="font-weight: bold;" href="/play?choice=paper">PAPER</a></li>
+	<li>&rarr;<a style="font-weight: bold;" href="/play?choice=scissors">SCISSORS</a></li>
+	<li>&rarr;<a style="font-weight: bold;" href="/play?choice=lizard">LIZARD</a></li>
+	<li>&rarr;<a style="font-weight: bold;" href="/play?choice=spock">SPOCK</a></li>
+	<li>&nbsp;<br /></li>
+	<li>You chose: {{user_weapon}}</li>
+	<li>Spockbot chose: {{computer_weapon}}</li>
+	<li>-----</li>
+	<li>Your total score: {{total}}</li>
+	<li>Games played: {{games_played}}</li>
+	<li>{{message}}</li>
+</ul>
+
+
+<p><a href="/leaderboard">Check leaderboard</a> &rarr;</p>
+<p>&nbsp;</p>
+
+
+{% endblock %}
