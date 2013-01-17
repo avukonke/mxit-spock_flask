@@ -33,9 +33,6 @@ def index():
 		ua = request.headers['X-Device-User-Agent']
 
 	user = session.query(MxitUser).filter_by(mxit_id=mxit_id).first()
-	if user.mxit_nick != nick:
-		user.mxit_nick = nick;
-		session.commit()
 
 	if not user:
 		user = MxitUser(mxit_id,nick)
