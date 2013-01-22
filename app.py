@@ -79,7 +79,7 @@ def play():
 		if user.games_played % 10 == 0:
 			user.points += 5
 			session.commit()
-			message = 'You\'ve played %s games - you get 15 bonus points!' % str(user.games_played)
+			message = 'You\'ve played %s games - you get 5 bonus points!' % str(user.games_played)
 		return render_template('play.html',
 		                       result = result, # Win or lose etc
 		                       user_weapon = user_choice,
