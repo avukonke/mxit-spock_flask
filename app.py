@@ -120,7 +120,6 @@ def leaderboard():
 		name = re.sub(expr, convert, span_in) # Replace and add spans
 		listy[name] = instance.points
 	import operator
-	sorted_listy = {}
 	sorted_listy = sorted(listy.iteritems(), key=operator.itemgetter(1), reverse=True)
 	return render_template('leaderboard.html',
 												listy=sorted_listy
