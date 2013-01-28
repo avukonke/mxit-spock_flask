@@ -5,8 +5,10 @@
 <p><a href="/play">Play again</a>&rarr;</p>
 
 <ol>
-{% for item in listy %}
-<li>{{item[0]}}</span>: {{item[1]}}</li>
+{% for key in listy %}
+{% autoescape false %}
+<li>{{key[0]}}</span>: {{key[1]}}</li>
+{% endautoescape %}
 {% endfor %}
 
 </ol>
