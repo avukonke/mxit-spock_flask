@@ -117,8 +117,8 @@ def leaderboard():
 
 	for instance in players:
 		span_in = unquote(instance.mxit_nick) # Get name, and unquote
-		name = re.sub(expr, convert, span_in).decode('ascii') # Replace and add spans
-		listy[name] = instance.points
+		name = re.sub(expr, convert, span_in) # Replace and add spans
+		listy[name.decode('ascii')] = instance.points
 	import operator
 	sorted_listy = sorted(listy.iteritems(), key=operator.itemgetter(1), reverse=True)
 	return render_template('leaderboard.html',
