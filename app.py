@@ -117,7 +117,7 @@ def leaderboard():
 
 	for instance in players:
 
-		span_in = unquote(instance.mxit_nick).encode('unicode') # Get name, and unquote
+		span_in = unquote(instance.mxit_nick).decode('utf-8') # Get name, and unquote
 		name = re.sub(expr, convert, span_in) # Replace and add spans
 		listy[name] = instance.points
 	import operator
