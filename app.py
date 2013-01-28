@@ -1,10 +1,9 @@
 #!/usr/bin/python
-from flask import Flask, render_template, request, redirect, url_for, session
-from models import MxitUser,session
-from spock import rpsls, name_to_number, number_to_name
+from flask import Flask, render_template, request, redirect, url_for
+from models import MxitUser, session
+from spock import rpsls, number_to_name
 from functools import wraps
 from mxit_ga import MxitGa
-import random, sys, requests
 
 app = Flask(__name__)
 app.config.from_object("config")
@@ -35,16 +34,15 @@ def index():
 	user = session.query(MxitUser).filter_by(mxit_id=mxit_id).first()
 
 	if not user:
-		user = MxitUser(mxit_id,nick)
+		user = MxitUser(mxit_id, nick)
 		session.add(user)
-  	session.commit()
+		session.commit()
 
 	return render_template('index.html',
-	                       nick = nick,
-	                       ua = ua,
-	                       user = user
-	                       )
-
+												nick=nick,
+												ua=ua,
+												user=user
+												)
 
 
 # Game screen
@@ -81,22 +79,22 @@ def play():
 			session.commit()
 			message = 'You\'ve played %s games - you get 5 bonus points!' % str(user.games_played)
 		return render_template('play.html',
-		                       result = result, # Win or lose etc
-		                       user_weapon = user_choice,
-		                       computer_weapon = number_to_name(game[1]),
-		                       total = user.points, # Total score
-		                       mxit_id = mxit_id,  # Remove before deploy
-		                       nick = nick,
-		                       games_played = user.games_played,
-		                       message = message,
-		                       )
-	else :
+													result=result, # Win or lose etc
+													user_weapon=user_choice,
+													computer_weapon=number_to_name(game[1]),
+													total=user.points, # Total score
+													mxit_id=mxit_id,  # Remove before deploy
+													nick=nick,
+													games_played=user.games_played,
+													message=message,
+													)
+	else:
 		result = 'Choose your weapon'
 		total = user.points
 		return render_template('play.html',
-		                       result = result,
-		                       total = total,
-		                       )
+													result=result,
+													total=total,
+													)
 
 @app.route('/rules')
 @track_page
@@ -112,20 +110,20 @@ def leaderboard():
 	#ua = request.headers['X-Device-User-Agent']
 	listy = {}
 	expr = r'#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})'
-	span_out = ''
+
 	def convert(matchobj):
-		output = '</span><span style="color: ' +	matchobj.group() + ';">'
+		output = '</span><span style="color: ' + matchobj.group() + ';">'
 		return output
 
 	for instance in players:
 		span_in = unquote(instance.mxit_nick) # Get name, and unquote
-		awesome = re.sub(expr, convert, span_in) # Replace and add spans
-		listy[awesome] = instance.points
+		name = re.sub(expr, convert, span_in) # Replace and add spans
+		listy[name] = instance.points
 	import operator
-	sorted_listy = sorted(listy.iteritems(), key = operator.itemgetter(1), reverse = True)
+	sorted_listy = sorted(listy.iteritems(), key=operator.itemgetter(1), reverse=True)
 	return render_template('leaderboard.html',
-	                       listy = sorted_listy
-	                       )
+												listy=sorted_listy
+												)
 
 
 if __name__ == '__main__':
