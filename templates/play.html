@@ -14,8 +14,10 @@
 		<li>SpockMaster	 chose: {{computer_weapon}}</li>
 		<li>-----</li>
 	{% endif %}
-	<li>Your total score: {{total}}</li>
-	<li>You are ranked<b>{{position}}</b> out of <b>{{total_users}}</b></li>
+	<li>Total score: {{total}}</li>
+	{% if {{position}} %}
+		<li>Rank: <b>{{position}}</b> out of <b>{{total_users}}</b></li>
+	{% endif %}
 	{% if games_played %}
 		<li>Games played: {{games_played}}</li>
 	{% endif %}
