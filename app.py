@@ -52,7 +52,6 @@ def index():
 												user=user
 												)
 
-
 # Game screen
 @app.route('/play')
 @track_page
@@ -87,6 +86,20 @@ def play():
 			session.commit()
 			message = 'You\'ve played %s games - you get 5 bonus points!' % str(user.games_played)
 
+		total_users = session.query(MxitUser).order_by('points desc')
+		tournament_position = {}
+		player_pos = total_users.count()
+		pos = 1
+		for player in total_users:
+			if player.id == user.id:
+				player_pos = pos
+				break
+			else:
+				pos += 1
+
+		tournament_position["position"] = player_pos
+		tournament_position["total_users"] = total_users.count()
+
 		return render_template('play.html',
 													result=result, # Win or lose etc
 													user_weapon=user_choice,
@@ -96,6 +109,7 @@ def play():
 													nick=nick,
 													games_played=user.games_played,
 													message=message,
+													position=tournament_position,
 													)
 	else:
 		result = 'Choose your weapon'
