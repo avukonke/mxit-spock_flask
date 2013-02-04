@@ -40,7 +40,7 @@ class Shink(object):
 		else:
 			self.device = "Mozilla Compatible"
 		ad = requests.get('http://ox-d.shinka.sh/ma/1.0/arj?auid=%s&%s' % (auid, qs), headers=self.headers)	 # To serve diverse ads
-		#print ad.json()
+		#print ad.text
 		try:
 			impression = requests.get(ad.json()['ads']['ad'][0]['creative'][0]['tracking']['impression'], headers=self.headers)
 			print "Impression: %s" % impression
@@ -78,9 +78,9 @@ class Shink(object):
 			click = self.ad.json()['ads']['ad'][0]['creative'][0]['tracking']['click']
 			target = self.ad.json()['ads']['ad'][0]['creative'][0]['target']
 			if target == "mxit":
-				return '<a href="%s"><img src="%s" /><img src="%s" /></a>' % (click, media, impression)
+				return '<a href="%s"><img src="%s" /></a><img src="%s" />' % (click, media, impression)
 			else:
-				return '<a href="%s" onclick="window.open(this.href); return false;" ><img src="%s" /><img src="%s" /></a>' % (click, media, impression)
+				return '<a href="%s" onclick="window.open(this.href); return false;" ><img src="%s" /></a><img src="%s" />' % (click, media, impression)
 		except Exception:
 			return False
 
