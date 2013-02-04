@@ -1,6 +1,6 @@
 #!/usr/bin/python
 import requests
-from urllib import quote_plus
+
 class Shink(object):
 	def __init__(self, auid, request_headers, remote_addr):
 		self.gender = False
@@ -30,17 +30,17 @@ class Shink(object):
 		if self.gender:
 			qs += "c.gender=%s&" % self.gender
 		if self.device:
-			qs += "c.device=%s&" % quote_plus(self.device)
+			qs += "c.device=%s&" % self.device
 		if self.country:
 			qs += "c.country=%s&" % self.country
 
-		print 'http://ox-d.shinka.sh/ma/1.0/arj?auid=%s&%s' % (auid, qs)
+		#print 'http://ox-d.shinka.sh/ma/1.0/arj?auid=%s&%s' % (auid,qs)
 		if self.device != False:
 			self.headers['User-Agent'] = "Mozilla Compatible/%s" % self.device
 		else:
 			self.device = "Mozilla Compatible"
 		ad = requests.get('http://ox-d.shinka.sh/ma/1.0/arj?auid=%s&%s' % (auid, qs), headers=self.headers)	 # To serve diverse ads
-		#print ad.text
+		print ad.text
 		try:
 			impression = requests.get(ad.json()['ads']['ad'][0]['creative'][0]['tracking']['impression'], headers=self.headers)
 			print "Impression: %s" % impression
@@ -56,7 +56,7 @@ class Shink(object):
 		try:
 			return self.ad.json()['ads']['ad'][0]['html']
 		except Exception:
-			return ''
+			return False
 
 	def return_text(self):
 		try:
@@ -69,7 +69,7 @@ class Shink(object):
 			else:
 				return '<img src="%s" /><a href="%s" onclick="window.open(this.href); return false;" >%s</a>' % (impression, click, alt)
 		except Exception:
-			return False
+			return ''
 
 	def return_image(self):
 		try:
@@ -82,7 +82,7 @@ class Shink(object):
 			else:
 				return '<a href="%s" onclick="window.open(this.href); return false;" ><img src="%s" /></a><img src="%s" />' % (click, media, impression)
 		except Exception:
-			return False
+			return ''
 
 if __name__ == "__main__":
 	pass
