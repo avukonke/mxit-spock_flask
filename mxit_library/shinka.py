@@ -1,6 +1,6 @@
 #!/usr/bin/python
 import requests
-
+from urllib import quote_plus
 class Shink(object):
 	def __init__(self, auid, request_headers, remote_addr):
 		self.gender = False
@@ -30,11 +30,11 @@ class Shink(object):
 		if self.gender:
 			qs += "c.gender=%s&" % self.gender
 		if self.device:
-			qs += "c.device=%s&" % self.device
+			qs += "c.device=%s&" % quote_plus(self.device)
 		if self.country:
 			qs += "c.country=%s&" % self.country
 
-		print 'http://ox-d.shinka.sh/ma/1.0/arj?auid=%s&%s' % (auid,qs)
+		print 'http://ox-d.shinka.sh/ma/1.0/arj?auid=%s&%s' % (auid, qs)
 		if self.device != False:
 			self.headers['User-Agent'] = "Mozilla Compatible/%s" % self.device
 		else:
