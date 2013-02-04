@@ -11,9 +11,8 @@ app.config.from_object("config")
 @app.context_processor
 def inject_ad():
 	from mxit_library.shinka import Shink
-	img = Shink("336970", request.headers, request.remote_addr).return_image()
-	text = Shink("336970", request.headers, request.remote_addr).return_text()
-	return dict(img=img, text=text)
+	ad = Shink("336970", request.headers, request.remote_addr)
+	return dict(ad=ad)
 
 def track_page(f):
 	@wraps(f)

@@ -6,11 +6,11 @@
 </head>
 <body>
 {% autoescape off %}
-	{{img}}
+	{{ad.return_image()}}
 {% endautoescape %}
 {% block body %}{% endblock %}
 {% autoescape off %}
-	{{text}}
+	{{ad.return_text()}}
 {% endautoescape %}
 <p>
 	<a href="/rules">How this works</a> |

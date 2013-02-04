@@ -65,9 +65,9 @@ class Shink(object):
 			alt = self.ad.json()['ads']['ad'][0]['creative'][0]['alt']
 			target = self.ad.json()['ads']['ad'][0]['creative'][0]['target']
 			if target == "mxit":
-				return '<img src="%s" /><a href="%s">%s</a> ' % (impression, click, alt)
+				return '<a href="%s">%s</a> ' % (click, alt)
 			else:
-				return '<img src="%s" /><a href="%s" onclick="window.open(this.href); return false;" >%s</a>' % (impression, click, alt)
+				return '<a href="%s" onclick="window.open(this.href); return false;" >%s</a>' % (click, alt)
 		except Exception:
 			return ''
 
