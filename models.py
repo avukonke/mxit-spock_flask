@@ -8,7 +8,7 @@ Base = declarative_base()
 from sqlalchemy import create_engine
 from config import MYSQL_DB
 
-db_engine = create_engine(MYSQL_DB,pool_recycle=60)
+db_engine = create_engine(MYSQL_DB, pool_recycle=60)
 
 from sqlalchemy.orm import sessionmaker
 Session = sessionmaker(bind=db_engine)

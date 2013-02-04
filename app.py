@@ -44,6 +44,7 @@ def index():
 		user = MxitUser(mxit_id, nick)
 		session.add(user)
 		session.commit()
+		session.close()
 
 	return render_template('index.html',
 												nick=nick,
@@ -80,10 +81,12 @@ def play():
 			result = "It's a draw."
 		user.games_played += 1
 		session.commit()
+		session.close()
 		message = ''
 		if user.games_played % 10 == 0:
 			user.points += 5
 			session.commit()
+			session.close()
 			message = 'You\'ve played %s games - you get 5 bonus points!' % str(user.games_played)
 		return render_template('play.html',
 													result=result, # Win or lose etc
@@ -114,6 +117,7 @@ def leaderboard():
 	from urllib import unquote
 	import re
 	players = session.query(MxitUser).order_by('points desc').limit(10)
+	session.close()
 	#ua = request.headers['X-Device-User-Agent']
 	listy = {}
 	expr = r'#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})'

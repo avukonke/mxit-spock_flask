@@ -5,14 +5,18 @@
 
 </head>
 <body>
-<a href="http://ox-d.shinka.sh/mw/1.0/rc?cs=5103804445194&cb={{random_number}}" ><img src="http://ox-d.shinka.sh/mw/1.0/ai?auid=336970&cs=5103804445194&cb={{random_number}}" border="0" alt=""></a>
-{% block body %} {% endblock %}
+{% autoescape off %}
+	{{img}}
+{% endautoescape %}
+{% block body %}{% endblock %}
+{% autoescape off %}
+	{{text}}
+{% endautoescape %}
 <p>
 	<a href="/rules">How this works</a> |
 	Play <a href="mxit://[bestblackjack]/" type="mxit/service-navigation">Blackjack</a> and
 	<a href="mxit://[chingchongcha]/" type="mxit/service-navigation">ChingChongCha</a> for prizes! |
 </p>
-
 
 </body>
 </html>
