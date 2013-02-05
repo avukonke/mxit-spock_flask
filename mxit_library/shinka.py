@@ -60,7 +60,7 @@ class Shink(object):
 
 	def return_text(self):
 		try:
-			impression = self.ad.json()['ads']['ad'][0]['creative'][0]['tracking']['impression']
+			#impression = self.ad.json()['ads']['ad'][0]['creative'][0]['tracking']['impression']
 			click = self.ad.json()['ads']['ad'][0]['creative'][0]['tracking']['click']
 			alt = self.ad.json()['ads']['ad'][0]['creative'][0]['alt']
 			target = self.ad.json()['ads']['ad'][0]['creative'][0]['target']

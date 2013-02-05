@@ -17,7 +17,7 @@ def inject_ad():
 def track_page(f):
 	@wraps(f)
 	def decorated_function(*args, **kwargs):
-		ga = MxitGa('UA-35740588-1')
+		ga = MxitGa('UA-38241355-1')
 		ga.track_page(request.headers, request.remote_addr, request.host, request.path, request.query_string)
 		return f(*args, **kwargs)
 	return decorated_function
