@@ -11,8 +11,9 @@ app.config.from_object("config")
 @app.context_processor
 def inject_ad():
 	from mxit_library.shinka import Shink
+	import random
 	ad = Shink("336970", request.headers, request.remote_addr)
-	return dict(ad=ad)
+	return dict(ad=ad, random=random.random())
 
 def track_page(f):
 	@wraps(f)
