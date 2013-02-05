@@ -9,7 +9,9 @@
 	{% autoescape off %}
 		{{ad.return_image()}}
 	{% endautoescape %}
-	{% block body %}{% endblock %}
+{% endif %}
+{% block body %}{% endblock %}
+{% if ad.return_text() %}
 	{% autoescape off %}
 		{{ad.return_text()}}
 	{% endautoescape %}
