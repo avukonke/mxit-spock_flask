@@ -40,7 +40,7 @@ class Shink(object):
 		else:
 			self.device = "Mozilla Compatible"
 		ad = requests.get('http://ox-d.shinka.sh/ma/1.0/arj?auid=%s&%s' % (auid, qs), headers=self.headers)	 # To serve diverse ads
-		# print ad.text
+		print ad.text
 		try:
 			impression = requests.get(ad.json()['ads']['ad'][0]['creative'][0]['tracking']['impression'], headers=self.headers)
 			print "Impression: %s" % impression
