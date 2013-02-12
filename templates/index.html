@@ -2,7 +2,9 @@
 {% block body %}
 <p><strong>ChingChongSpock</strong></p>
 <p>As seen on Big Bang Theory!</p>
-<p>The player with the highest score every Monday is rewarded with R25 airtime!</p>
+{% if user.id == 'm20848119002' %}
+	<p>You've won R25 airtime! Please add Chingteam as a contact to claim your prize. Your secret number is PP99.</p>
+{% endif %}
 <p>Just like ChingChongCha, but with less chance to draw.</p>
 <p><a href="/play">Click here to play</a></p>
 {% endblock %}
